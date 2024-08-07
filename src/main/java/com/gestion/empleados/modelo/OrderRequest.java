@@ -7,9 +7,19 @@ public class OrderRequest {
     private Long userId;
     private LocalDateTime orderDate;
     private String status;
+    private Double total;
     private List<OrderItem> items;
 
     // Getters and Setters
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
     public Long getUserId() {
         return userId;
     }

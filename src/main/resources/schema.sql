@@ -31,3 +31,12 @@ CREATE TABLE order_products (
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
+ALTER TABLE orders
+ADD total DECIMAL(10, 2);
+UPDATE orders o
+SET o.total = (
+        SELECT SUM(p.price)
+        FROM order_products op
+            JOIN product p ON op.product_id = p.id
+        WHERE op.order_id = o.id
+    );

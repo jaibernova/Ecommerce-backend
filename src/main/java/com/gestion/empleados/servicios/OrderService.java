@@ -44,7 +44,7 @@ public class OrderService {
         Order order = new Order();
         order.setOrderDate(orderRequest.getOrderDate());
         order.setStatus(orderRequest.getStatus());
-        order.setTotal(0.0); // Set total to be calculated later
+        order.setTotal(orderRequest.getTotal()); // Set total to be calculated later
 
         // Set the user
         User user = userRepository.findById(orderRequest.getUserId())
@@ -58,7 +58,6 @@ public class OrderService {
                     .orElseThrow(() -> new RuntimeException("Product not found"));
             total += product.getPrice() * item.getQuantity();
         }
-        order.setTotal(total);
 
         Order savedOrder = orderRepository.save(order);
 
